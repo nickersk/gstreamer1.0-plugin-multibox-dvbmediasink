@@ -793,7 +793,7 @@ static int video_write(GstBaseSink *sink, GstDVBVideoSink *self, GstBuffer *buff
 	{
 		if (self->flushing)
 		{
-			GST_INFO_OBJECT(self, "flushing, skip %d bytes", len - written);
+			GST_INFO_OBJECT(self, "flushing, skip %lu bytes", len - written);
 			break;
 		}
 		else if (self->paused || self->unlocking)
@@ -801,12 +801,12 @@ static int video_write(GstBaseSink *sink, GstDVBVideoSink *self, GstBuffer *buff
 			GST_OBJECT_LOCK(self);
 			queue_push(&self->queue, buffer, written, end);
 			GST_OBJECT_UNLOCK(self);
-			GST_TRACE_OBJECT(self, "pushed %d bytes to queue", len - written);
+			GST_TRACE_OBJECT(self, "pushed %lu bytes to queue", len - written);
 			break;
 		}
 		else
 		{
-			GST_TRACE_OBJECT (self, "going into poll, have %d bytes to write", len - written);
+			GST_TRACE_OBJECT (self, "going into poll, have %lu bytes to write", len - written);
 		}
 		if (poll(pfd, 2, -1) < 0)
 		{

@@ -277,7 +277,7 @@ static GstFlowReturn gst_dtsdownmix_handle_frame(GstDtsDownmix *dts, guint8 *dat
 	{
 		gint i;
 		gint16 *dest;
-		gint8 *header;
+		guint8 *header;
 #if GST_VERSION_MAJOR < 1
 		header = GST_BUFFER_DATA(buffer);
 #else
@@ -461,7 +461,7 @@ static GstFlowReturn gst_dtsdownmix_chain(GstPad *pad, GstObject *parent, GstBuf
 		}
 		else
 		{
-			GST_LOG("Not enough data available (needed %d had %d)", dts->framelength, size);
+			GST_LOG("Not enough data available (needed %d had %lu)", dts->framelength, size);
 			break;
 		}
 	}
